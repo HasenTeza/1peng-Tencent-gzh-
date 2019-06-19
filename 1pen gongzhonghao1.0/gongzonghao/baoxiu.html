@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>用户报修</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+    <link href="css/zhaoshang.css" rel='stylesheet' type='text/css'/>
+    <!-- jq -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+<header>
+    <h1>用户报修</h1>
+</header>
+<div class="w3ls-contact">
+    <form action="#" method="post" id="baoxiu">
+        <div class="agile-field-txt">
+            <label>小区 :</label>
+            <div class="mr_agilemain">
+                <div class="left-wthree">
+                    <select name="community_code" onchange="getBuildingCodeToCommunityCode();" id="xiaoqu">
+                        <option value=''>请选择小区</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="agile-field-txt">
+            <label>楼栋 :</label>
+            <select name="building_code" onclick="checkLD()" onchange="getHouseMsgToBuildingCode();" id="loudong">
+                <option value=''>请选择楼栋</option>
+            </select>
+        </div>
+        <div class="agile-field-txt">
+            <label>房屋 :</label>
+            <select onclick="checkFW()" name="house_code" id="fangwu">
+                <option value=''>请选择房屋号</option>
+            </select>
+        </div>
+        <div class="agile-field-txt">
+            <label>报销设备 :</label>
+            <input type="text" name="device_name" id="device_name"/>
+        </div>
+
+        <div class="agile-field-txt">
+            <label>
+                描述 ：</label>
+            <textarea name="desc" id="desc" placeholder="设备哪方面需要修理"></textarea>
+        </div>
+        <div class="w3ls-contact  w3l-sub">
+            <input type="button" value="报修" onclick="baoxiu();" status="0">
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $.post("http://ej.1peng.com.cn/index.php/admin/house/getCommunity", function (data) {
+            console.log(data);
+            if (data.statuscode == 1) {
+                $("#xiaoqu").empty();
+                $("#xiaoqu").append("<option value=''>请选择小区名</option>");
+                for (var i = 0; i < data.result.length; i++) {
+                    $("#xiaoqu").append('<option value=' + data.result[i].community_code + '>' + data.result[i].name + '</option>');
+                }
+            } else if (data.statuscode == 2) {
+                alert(data.message)
+            }
+        })
+    });
+
+
+
+    function getBuildingCodeToCommunityCode() {
+        //$("#loudong").empty();
+        var community_code = $("#xiaoqu").val();
+
+        if (community_code == '') {
+            alert('请先选择所在小区');
+        } else {
+            var data ;//= 'community_code=' + community_code;
+            data={
+                community_code:community_code
+            };
+            $.post("http://ej.1peng.com.cn/index.php/admin/house/getBuilding", data, function (data) {
+                console.log(data);
+                if (data.statuscode = 1) {
+                    $("#loudong").empty();
+                    $("#loudong").append("<option value=''>请选择楼号</option>");
+                    for (var i = 0; i < data.result.length; i++) {
+                        $("#loudong").append('<option value=' + data.result[i].building_code + '>' + data.result[i].name + '</option>');
+                    }
+                } else if (data.statuscode == 2) {
+                    alert(data.message)
+                }
+            })
+        }
+    }
+
+    function getHouseMsgToBuildingCode() {
+
+        var community_code = $("#xiaoqu").val();
+        var building_code = $("#loudong").val();
+        if (community_code == '') {
+            alert('请先选择所在小区');
+        } else {
+            var data ;//= 'community_code=' + community_code;
+            data={
+                community_code:community_code,
+                building_code:building_code
+            };
+            $.post("https://www.ypzhsq.com/xcx/wxapp/public/index.php/index/house/getHouse", data, function (data) {
+                console.log(data);
+                if (data.statuscode == 1) {
+                    $("#fangwu").empty();
+                    $("#fangwu").append("<option value=''>请选择房号</option>");
+                    for (var i = 0; i < data.result.length; i++) {
+                        $("#fangwu").append('<option value=' + data.result[i].house_code + '>' + data.result[i].name + '</option>');
+                    }
+                } else if (data.statuscode == 2) {
+                    alert(data.message)
+                }
+            })
+        }
+    }
+
+    function baoxiu() {
+        var data = $("#baoxiu").serialize();
+        $.post("http://ej.1peng.com.cn/index.php/admin/Repair/addRepair", data, function (data) {
+            console.log(data);
+            if (data.statuscode == 1) {
+                alert("报修成功");
+            } else if (data.status == 0) {
+                alert("已成功报修，请放心")
+            }
+        })
+    }
+
+    function checkLD() {
+        var community_code = $("#xiaoqu").val();
+
+        if (community_code == '') {
+            alert('请先选择所在小区');
+        }
+    }
+    function checkFW() {
+        var building_code = $("#loudong").val();
+        if (building_code == '') {
+            alert('请先选择所在楼栋');
+        }
+    }
+</script>
+</html>

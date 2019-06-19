@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>广告招商</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+  <link href="css/zhaoshang.css" rel='stylesheet' type='text/css' />
+   <!-- jq -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>广告招商</h1>
+  </header>
+  <div class="w3ls-contact">
+    <form action="#" method="post" id="guanggao">
+      <div class="agile-field-txt">
+        <label>称呼 :</label>
+        <div class="mr_agilemain">
+          <div class="left-wthree">
+            <input type="text" name="name" id="name" placeholder="例：亿澎科技有限公司 何老板 " required="">
+          </div>
+        </div>
+      </div>
+
+      <div class="agile-field-txt">
+        <label>联系电话 :</label>
+        <input type="text" name="telephone" id="telephone" placeholder="xxxxxxxxxxx(十一位) " required="" />
+      </div>
+      <div class="agile-field-txt">
+        <label>
+          留言 ：</label>
+         <textarea name="remarks" id="remarks" placeholder="打个招呼吧，您有什么想对我们说的呢" required=""></textarea>
+      </div>
+      <div class="w3ls-contact  w3l-sub">
+        <input type="button" value="确定" onclick="zhaoshang();" status="0">
+      </div>
+    </form>
+  </div>
+</body>
+<script type="text/javascript">
+  function zhaoshang() {
+       var data=$("#guanggao").serialize();
+        $.post("https://www.ypzhsq.com/xcx/wxapp/public/index.php/index/Investment/addInvestment",data, function(data) {
+            console.log(data);
+            if(data.statuscode==1){
+                alert("成功");
+            }else if(data.status==0){ 
+                alert("已成功提交")
+            }
+        })
+    }
+</script>
+</html>

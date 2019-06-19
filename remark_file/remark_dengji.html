@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <title>厂房个人房东房东信息</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="dengji.js"></script>
+</head>
+<body>
+<div class="w100">
+    <div style="height:10px;"></div>
+    <div class="w100_box">
+        <!--详细开始-->
+        <div class="panel-content pl15 pr15">
+            <div class="main_content main_content_2">
+                <div class="infobox">
+                    <form id="infoform">
+                        <table class="infotable pt15">
+                            <tbody>
+                            <tr>
+                                <td class="tdLeft" colspan="2" style="text-align:center;">
+                                    <div class="tximg">
+                                        <img src="img/touxiang.jpg" />
+                                        <input type="file" class="inputfile" disabled="disabled" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    租住类型：
+                                </td>
+                                <td class="tdLeft">
+                                    <select class="input" name="lease_type"  id="fangshi">
+                                        <option value="">请选择租住方式</option>
+                                        <option name="zz" value="1">整租</option>
+                                        <option name="hz" value="2">合租</option>
+                                        <option name="cf" value="3">厂房</option>
+                                        <option name="sp" value="4">商铺</option>
+                                        <option name="xzl" value="5">写字楼</option>
+                                    </select>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td class="tdRight">
+                                    出租方式：
+                                </td>
+                                <td class="tdLeft">
+                                    <select class="input" name="rental_mode"  id="chuzu">
+                                        <option value="">请选择出租方式</option>
+                                        <option name="grfd" value="1">个人房东</option>
+                                        <option name="wyzz" value="2">物业直租</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    所在小区：
+                                </td>
+                                <td class="tdLeft">
+                                    <select class="input" onchange="getBuildingCodeToCommunityCode();" name="community_code"  id="xiaoqu">
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    单元号：
+                                </td>
+                                <td class="tdLeft">
+                                    <select class="input" name="building_code"   id="loudong">
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    户主名称：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" class="input" name="owner_name" id="name" autocomplete="off" placeholder=""  />
+                                </td>
+                            </tr>
+                            <tr>
+
+
+                            <tr>
+                                <td class="tdRight">
+                                    联系方式：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" name="owner_tel" class="input" id="tph" autocomplete="off" placeholder=""  />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    房号：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" name="rooms" class="input" id="fanghao" autocomplete="off" placeholder=""  />
+                                </td>
+                            </tr>
+
+
+                            <td class="tdRight">
+                                单元：
+                            </td>
+                            <td class="tdLeft">
+                                <input type="text" name="unit" class="input" id="danyuan" autocomplete="off" placeholder=""/>
+                            </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    楼层：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" name="floor" class="input" id="louceng" autocomplete="off" placeholder=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    面积:
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" name="area" class="input" id="mianji" autocomplete="off" placeholder=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    厅室：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" name="living" class="input" id="tingshi" autocomplete="off" placeholder=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    朝向：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" name="orientation" class="input" id="chaoxiang" autocomplete="off" placeholder=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    租金：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" name="rent" class="input" id="zujin" autocomplete="off" placeholder="" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    入住时间：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" name="enter_time" class="input" id="time" autocomplete="off" placeholder="" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    房屋描述：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" class="input" id="miaoshu" autocomplete="off" placeholder=""  />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    厅室：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" class="input" id="tingshi" autocomplete="off" placeholder="" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    委托方：
+                                </td>
+                                <td class="tdLeft">
+                                    <input type="text" name="entrust" class="input" id="weituofang" autocomplete="off" placeholder="" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdRight">
+                                    是否出租：
+                                </td>
+                                <td class="tdLeft">
+                                    <select class="input"id="chuzu">
+                                        <option name="yes" value="yes">是</option>
+                                        <option name="no" value="no">否</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+
+
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="box-btn pt15">
+                    <button class="please_fo_btn please_fo_btn2" onclick="sendRentingMsg();" status="0">提交</button>
+                </div>
+            </div>
+        </div>
+        <!--详细结束-->
+    </div>
+</div>
+
+<script>
+    //跨域问题：如果页面与请求的地址不在同一域名或容易出现‘跨域问题’这会使前端请求不到数据
+    // <input type="text" class="input" id="name" autocomplete="off" placeholder="" disabled="disabled" />
+    //进入页面后立即执行获取小区名称接口然后赋值给小区
+    $(function () {//$(function ()表示进入此界面立即执行的JS
+        $.post("http://ej.1peng.com.cn/index.php/admin/house/getCommunity", function(data) {//这是ajax post方式的简写 详情查看http://www.w3school.com.cn/jquery/ajax_post.asp
+            console.log(data);//控制台打印输出
+            //如果状态码为1代表成功
+            if(data.statuscode==1){
+                $("#xiaoqu").empty();
+                $("#xiaoqu").append("<option value=''>请选择小区名</option>");
+                for(var i=0;i<data.result.length;i++){
+                    $("#xiaoqu").append('<option value='+data.result[i].community_code+'>'+data.result[i].name+'</option>');
+                }
+            }else if(data.statuscode==2){ //否则如果状态嘛是2则显示错误信息或做其他处理
+                //弹窗提示错误信息
+                alert(data.message)
+            }
+        })
+    });
+
+</script>
+
+
+</body>
+<script>
+    //点击提交后执行此方法进行ajax提交房屋信息
+    function sendRentingMsg() {
+       var data=$("#infoform").serialize();
+        $.post("http://ej.1peng.com.cn/index.php/admin/house/addHouse",data, function(data) {//这是ajax post方式的简写 详情查看http://www.w3school.com.cn/jquery/ajax_post.asp
+            console.log(data);//控制台打印输出
+            //如果状态码为1代表成功
+            if(data.statuscode==1){
+                alert("提交成功");
+            // }
+            else(data.status==2){
+                alert("租房信息已存在");
+            }
+
+        })
+    }
+
+    //获取已选择小区对应的楼号
+    //本方法由选择小区时的onchange事件（当用户切换选择后才会触发）触发
+    function getBuildingCodeToCommunityCode(){
+        //用户切换小区要把之前小区附属的漏洞清空
+        $("#loudong").empty();
+        //console.log(data);//控制台打印输出
+        //获取已选择的小区编码，如未选择则community_code为空
+        var community_code=$("#xiaoqu").val();
+        //如果未选择弹出提示
+       if(community_code==''){
+           alert('请先选择所在小区');
+       }else{
+           //如果选择了就访问接口获取小区下属楼号
+           var data='community_code='+community_code;
+           $.post("http://ej.1peng.com.cn/index.php/admin/house/getBuilding",data, function(data) {//这是ajax post方式的简写 详情查看http://www.w3school.com.cn/jquery/ajax_post.asp
+               console.log(data);//控制台打印输出用来调试
+               //如果状态码为1代表成功
+               if(data.statuscode==1){
+                   $("#loudong").empty();
+                   $("#loudong").append("<option value=''>请选择楼号</option>");
+                   for(var i=0;i<data.result.length;i++){
+                       $("#loudong").append('<option value='+data.result[i].building_code+'>'+data.result[i].name+'</option>');
+                   }
+               }else if(data.statuscode==2){ //否则如果状态嘛是2则显示错误信息或做其他处理
+                   //弹窗提示错误信息
+                   alert(data.message)
+               }
+           })
+       }
+    }
+
+
+
+
+    // 楼层房号
+function fanghao(){
+$("#fanghao").empty();
+var louceng=$("#louceng").val();
+if (louceng=='') {
+    alert('请选择楼层(必选)');
+}else{
+
+
+}
+}
+
+</script>
+</html>
