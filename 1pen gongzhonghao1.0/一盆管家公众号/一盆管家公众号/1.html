@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>发布房源</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <!-- 主框架 -->
+    <link href="css/kuangjia.css" rel="stylesheet" type="text/css"/>
+    <!-- 表单css -->
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <!-- jq -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <!--主框架js  -->
+    <script type="text/javascript" src="js/tab.js"></script>
+    <!-- 时间组件 -->
+    <script type="text/javascript" src=js/jedate.js></script>
+    <!-- 招商 -->
+    <script type="text/javascript" src="js/zhaoshang.js"></script>
+
+<!--手机滑动 轮播图 -->
+    <link href="css/swiper.css" rel="stylesheet" type="text/css" />
+    <script src="js/swiper.js" type="text/javascript"></script>
+     <script type="text/javascript">
+        $(document).ready(function () {
+            //banner滑动
+            var banner = new Swiper('.banner', {
+                autoplay: 1000,
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                lazyLoading: true,
+                loop: true
+            });
+        });
+    </script>
+
+</head>
+<body>
+<section class="aui-flexView">
+    <header class="aui-navBar aui-navBar-fixed" style="background-color: #ff6b6b">
+
+        <a style="margin-left: 120px; color: #ffffff;text-align: center; height: 44px;margin-top: 10px;">
+           <b>一盆社区发布房源</b> 
+        </a>
+    </header>
+    <section class="aui-scrollView">
+        <div class="aui-tab" data-ydui-tab>
+            <ul class="tab-nav">
+                <li class="tab-nav-item tab-active" style="width: 80px;">
+                    <a href="javascript:;">发布房源</a>
+                </li>
+                <li class="tab-nav-item" style="width: 80px;">
+                    <a href="javascript:;">申请团长</a>
+                </li>
+                <li class="tab-nav-item " style="width: 100px;">
+                    <a href="javascript:;">智慧社区合作</a>
+                </li>
+                <li class="tab-nav-item" style="width: 80px;">
+                    <a href="javascript:;">广告招商</a>
+                </li>
+            </ul>
+            <div class="tab-panel">
+                <!-- 第一个页面 -->
+                <div class="tab-panel-item tab-active">
+                    <div class="aui-list-box">
+                        <div>
+                            <div style="height:10px;"></div>
+                            <div class="w100_box">
+                                <div class="panel-content pl15 pr15">
+                                    <div class="main_content main_content_2">
+                                        <div class="infobox">
+                                            <form id="infoform1">
+                                                <table class="infotable pt15">
+                                                    <tbody>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            户主名称：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" class="input" name="owner_name" id="name"
+                                                                   autocomplete="off" placeholder="请填入您的名称（必填）"
+                                                                   />
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            联系方式：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="owner_tel" class="input" id="tph"
+                                                                   autocomplete="off" placeholder="请填入您的联系方式（必填）"  />
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            出租类型：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select class="input" name="lease_type" id="fangshi">
+                                                                <option value="">请选择租住方式(必选)</option>
+                                                                <option name="zz" value="1">整租</option>
+                                                                <option name="hz" value="2">合租</option>
+                                                                <option name="cf" value="3">厂房</option>
+                                                                <option name="sp" value="4">商铺</option>
+                                                                <option name="xzl" value="5">写字楼</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            出租方式：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select class="input" name="rental_mode" id="chuzu">
+                                                                <option value="">请选择出租方式(必选)</option>
+                                                                <option name="grfd" value="2">个人房东</option>
+                                                                <option name="wyzz" value="1">物业直租</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            所在小区：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select class="input"
+                                                                    onchange="getBuildingCodeToCommunityCode();"
+                                                                    name="community_code" id="xiaoqu">
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            楼数：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select class="input" name="building_code" id="loudong"
+                                                                    placeholder="（必填）">
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            单元号：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select class="input" name="unit" id="danyuan">
+                                                                <option value="">请选择房屋单元(必选)</option>
+                                                                <option name="1d" value="1">一单元</option>
+                                                                <option name="2d" value="2">二单元</option>
+                                                                <option name="3d" value="3">三单元</option>
+                                                                <option name="4d" value="4">四单元</option>
+                                                                <option name="5d" value="5">五单元</option>
+                                                                <option name="6d" value="6">六单元</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            房号：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="rooms" class="input" id="fanghao"
+                                                                   autocomplete="off" placeholder="请安心填写，不会对外公开（必填）"/>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            楼层：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select class="input" name="floor" id="louceng">
+                                                                <option value="">请选择房屋楼层(必选)</option>
+                                                                <option name="1c" value="1">一楼</option>
+                                                                <option name="2c" value="2">二楼</option>
+                                                                <option name="3c" value="3">三楼</option>
+                                                                <option name="4c" value="4">四楼</option>
+                                                                <option name="5c" value="5">五楼</option>
+                                                                <option name="6c" value="6">六楼</option>
+                                                                <option name="7c" value="7">七楼</option>
+                                                                <option name="8c" value="8">八楼</option>
+                                                                <option name="9c" value="9">九楼</option>
+                                                                <option name="10c" value="10">十楼</option>
+                                                                <option name="11c" value="11">十一楼</option>
+                                                                <option name="12c" value="12">十二楼</option>
+                                                                <option name="13c" value="13">十三楼</option>
+                                                                <option name="14c" value="14">十四楼</option>
+                                                                <option name="15c" value="15">十五楼</option>
+                                                                <option name="16c" value="16">十六楼</option>
+                                                                <option name="17c" value="17">十七楼</option>
+                                                                <option name="18c" value="18">十八楼</option>
+                                                                <option name="19c" value="19">十九楼</option>
+                                                                <option name="20c" value="20">二十楼</option>
+                                                                <option name="21c" value="21">二十一楼</option>
+                                                                <option name="22c" value="22">二十二楼</option>
+                                                                <option name="23c" value="23">二十三楼</option>
+                                                                <option name="24c" value="24">二十四楼</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            面积：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select class="input" name="area" id="mianji">
+                                                                <option value="">请选择房屋面积(必选)</option>
+                                                                <option name="1m" value="1">一单元</option>
+                                                                <option name="2m" value="2">二单元</option>
+                                                                <option name="3m" value="3">三单元</option>
+                                                                <option name="4m" value="4">四单元</option>
+                                                                <option name="5m" value="5">五单元</option>
+                                                                <option name="6m" value="6">六单元</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            朝向：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select class="input" name="orientation" id="chaoxiang">
+                                                                <option value="">请选择房屋朝向(必选)</option>
+                                                                <option name="1x" value="1">朝向东</option>
+                                                                <option name="2x" value="2">朝向南</option>
+                                                                <option name="3x" value="3">朝向西</option>
+                                                                <option name="4x" value="4">朝向北</option>
+                                                                <option name="5x" value="5">朝向东南</option>
+                                                                <option name="6x" value="6">朝向西南</option>
+                                                                <option name="7x" value="7">朝向南北</option>
+                                                                <option name="8x" value="8">朝向东北</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            厅室：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select name="living"  class="input" id="tingshi">
+                                                                <option value="">请选择房屋厅室(必选)</option>
+                                                                <option name="1t" value="1">一室一厅</option>
+                                                                <option name="2t" value="2">两室一厅</option>
+                                                                <option name="3t" value="3">三室一厅</option>
+                                                                <option name="4t" value="4">四室一厅</option>
+                                                                <option name="5t" value="5">一室一厅一卫</option>
+                                                                <option name="6t" value="6">两室一厅一卫</option>
+                                                                <option name="7t" value="7">三室一厅一卫</option>
+                                                                <option name="8t" value="8">四室一厅一卫</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            租金(元)：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="rent" class="input" required="yes"
+                                                                   id="zujin" autocomplete="off" placeholder="请填写房屋租金（必填）"/>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            是否出租：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <select class="input" id="chuzu">
+                                                                <option>请选择是否出租(必选)</option>
+                                                                <option name="yes" value="yes">是</option>
+                                                                <option name="no" value="no">否</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            入住时间：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="enter_time" class="input"
+                                                                   id="dateinfo" autocomplete="off" placeholder="请选择日期"
+                                                                   notNull="日期"/>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            委托方：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="entrust" class="input"
+                                                                   id="weituofang" autocomplete="off"
+                                                                   placeholder="请输入委托方名称（必填）" />
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            房屋描述：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <textarea name="desc" class="input" id="miaoshu"
+                                                                      placeholder="请描述房屋特点(例：地铁公交站附近交通方便，有窗户采光好，房间干净新装修)"
+                                                                      autocomplete="off"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <div class="box-btn pt15">
+                                            <button class="please_fo_btn please_fo_btn2" onclick="sendRentingMsg();"
+                                                    status="0">提交
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第二 -->
+                <div class="tab-panel-item">
+                    <div class="aui-list-box">
+                        <!--SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+                        <div>
+                            <div style="height:10px;"></div>
+                            <div class="w100_box">
+                                <div class="panel-content pl15 pr15">
+                                    <div class="main_content main_content_2">
+                                        <div class="infobox">
+                                            <form id="infoform2">
+                                                <table class="infotable pt15">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            姓名：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" class="input" name="truename" id="tname"
+                                                                   autocomplete="off" placeholder="请填入真是姓名（必填）"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            电话：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="mobile" class="input" id="ttph"
+                                                                   autocomplete="off" placeholder="您的电话（必填）"  />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            职业：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="quarters" class="input" id="tzhiye"
+                                                                   autocomplete="off" placeholder="您的职业（必填）"
+                                                                  />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            申请小区：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="occupation" class="input" id="txiaoqu"
+                                                                   autocomplete="off" placeholder="请填写小区（必填）"
+                                                                   />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                           建成年限:
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="create_time" class="input" id="tage"
+                                                                   autocomplete="off" placeholder="（必填）" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            住户数：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <input type="text" name="count" class="input"
+                                                                   id="tzhuhu" autocomplete="off"
+                                                                   placeholder="请填写小区住户数（必填）" />
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="tdRight">
+                                                            申请说明：
+                                                        </td>
+                                                        <td class="tdLeft">
+                                                            <textarea name="remarks" class="input" id="miaoshu"
+                                                                      placeholder="shuomingshuomingshuomingshuomingshuomingshuomingshuomingshuomingshuomingshuomingshuoming"
+                                                                      autocomplete="off"></textarea>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <div class="box-btn pt15">
+                                            <button class="please_fo_btn please_fo_btn2" onclick="
+                                            sendRentingsq();"
+                                                    status="0">申请
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
+                    </div>
+                </div>
+                <!-- 第三个 -->
+                <div class="tab-panel-item ">
+                    <div class="aui-list-box"> 
+                   
+                     <div class="mui-content">
+            <div class="banner swiper-container swiper-container-horizontal">
+                <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-1600px, 0px, 0px);">
+                    <div class="swiper-slide swiper-slide-duplicate"  style="width: 320px;"><a href="javascript:void(0)"><img class="swiper-lazy swiper-lazy-loaded" alt="" src="img/banner1.jpg"></a></div>
+                    <div class="swiper-slide" style="width: 320px;"><a href="javascript:void(0)"><img class="swiper-lazy swiper-lazy-loaded" alt="" src="img/banner2.jpg"></a></div>
+                    <div class="swiper-slide" style="width: 320px;"><a href="javascript:void(0)"><img class="swiper-lazy swiper-lazy-loaded" alt="" src="img/banner3.jpg"></a></div>
+                    <div class="swiper-slide" style="width: 320px;"><a href="javascript:void(0)"><img class="swiper-lazy swiper-lazy-loaded" alt="" src="img/banner4.jpg"></a></div>
+                    <div class="swiper-slide swiper-slide-prev" style="width: 320px;"><a href="javascript:void(0)"><img class="swiper-lazy swiper-lazy-loaded" alt="" src="img/banner1.jpg"></a></div>
+                    <div class="swiper-slide swiper-slide-duplicate swiper-slide-active" style="width: 320px;"><a href="javascript:void(0)"><img class="swiper-lazy swiper-lazy-loaded" alt="" src="img/banner2.jpg"></a></div>
+                </div>
+                <div class="swiper-pagination swiper-pagination-clickable"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+            </div>
+        <div class="product-list">
+             <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/1.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/1w.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#"> 
+                    <div class="tu">
+                        <img src="img/2w.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/2.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/3.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/3w.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/4w.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/4.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/5.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/5w.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/6w.png">
+                    </div>
+                </a>
+            </div>
+            <div class="list fl">
+                <a href="#">
+                    <div class="tu">
+                        <img src="img/6.png">
+                    </div>
+                </a>
+            </div>
+    </div>
+   <!--脚部开始-->
+    <footer class="footer">
+         <div class="lxwm">
+                <h2>联系我们</h2>
+                <p>北京亿澎互联网科技有限公司</p>
+                <p>联系电话：18612507000</p>
+                <p>公司地址：北京市朝阳区十里堡北里甲34号汉庭酒店院内3号楼二层</p>
+            </div>
+    </footer>
+    <!--脚部结束-->
+                    <!-- EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
+                    </div>
+                    </div>
+                </div>
+
+                 <!-- 第四 -->
+                <div class="tab-panel-item">
+                    <div class="aui-list-box">
+                        <!-- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS -->
+
+
+                        <!-- EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<script>
+
+
+    $(function () {
+        $.post("http://ej.1peng.com.cn/index.php/admin/house/getCommunity", function (data) {
+            console.log(data);
+            if (data.statuscode == 1) {
+                $("#xiaoqu").empty();
+                $("#xiaoqu").append("<option value=''>请选择房屋所在小区</option>");
+                for (var i = 0; i < data.result.length; i++) {
+                    $("#xiaoqu").append('<option value=' + data.result[i].community_code + '>' + data.result[i].name + '</option>');
+                }
+            } else if (data.statuscode == 2) {
+                alert(data.message)
+            }
+        })
+    });
+
+</script>
+
+</body>
+<script>
+    function sendRentingMsg() {
+        var data = $("#infoform1").serialize();
+        // 判断不为空S
+        var danyuan = $("#danyuan").val();
+        if (danyuan == '') {
+            alert("单元号不能为空！");
+            return false;
+        }
+        var fangshi = $("#fangshi").val();
+        if (fangshi == '') {
+            alert("出租类型不能为空！");
+            return false;
+        }
+        var chuzu = $("#chuzu").val();
+        if (chuzu == '') {
+            alert("出租方式不能为空！");
+            return false;
+        }
+        var xiaoqu = $("#xiaoqu").val();
+        if (xiaoqu == '') {
+            alert("小区不能为空！");
+            return false;
+        }
+        var name = $("#name").val();
+        if (name == '') {
+            alert("户主不能为空！");
+            return false;
+        }
+        var tph = $("#tph").val();
+        if (tph == '') {
+            alert("联系方式不能为空！");
+            return false;
+        }
+        var fanghao = $("#fanghao").val();
+        if (fanghao == '') {
+            alert("房号不能为空！");
+            return false;
+        }
+        var louceng = $("#louceng").val();
+        if (louceng == '') {
+            alert("楼层不能为空！");
+            return false;
+        }
+        var mianji = $("#mianji").val();
+        if (mianji == '') {
+            alert("面积不能为空！");
+            return false;
+        }
+        var chaoxiang = $("#chaoxiang").val();
+        if (chaoxiang == '') {
+            alert("朝向不能为空！");
+            return false;
+        }
+        var zujin = $("#zujin").val();
+        if (zujin == '') {
+            alert("租金不能为空！");
+            return false;
+        }
+        var tingshi = $("#tingshi").val();
+        if (tingshi == '') {
+            alert("厅室不能为空！");
+            return false;
+        }
+        var weituofang = $("#weituofang").val();
+        if (weituofang == '') {
+            alert("委托方不能为空！");
+            return false;
+        }
+        // 判断不为空E
+        $.post("http://ej.1peng.com.cn/index.php/admin/house/addHouse", data, function (data) {
+            console.log(data);
+            if (data.statuscode == 1) {
+                alert("提交成功");
+            } else if (data.statuscode == 2) {
+                alert(data.message)
+            }
+        })
+    }
+    // /////////////////////////////////////////////////////////////////////////////////
+    // 申请按钮
+     function sendRentingsq() {
+        var data = $("#infoform2").serialize();
+        var tname = $("#tname").val();
+        if (tname == '') {
+            alert("申请团长姓名不能为空！");
+            return false;
+        }
+        var ttph = $("#ttph").val();
+        if (ttph == '') {
+            alert("联系方式不能为空！");
+            return false;
+        }
+
+         $.post("https://www.ypzhsq.com/xcx/wxapp/public/index.php/index/Mentionapply/addApply", data, function (data) {
+            console.log(data);
+            if (data.statuscode == 1) {
+                alert("已提交申请");
+            } else if (data.statuscode == 2) {
+                alert(data.message)
+            }
+             })
+
+     }
+        
+    // ///////////////////////////////////////////////////////////////////////////////////
+
+    function getBuildingCodeToCommunityCode() {
+        $("#loudong").empty();
+        var community_code = $("#xiaoqu").val();
+        if (community_code == '') {
+            alert('请先选择所在小区');
+        } else {
+            var data = 'community_code=' + community_code;
+            $.post("http://ej.1peng.com.cn/index.php/admin/house/getBuilding", data, function (data) {
+                console.log(data);
+                if (data.statuscode == 1) {
+                    $("#loudong").empty();
+                    $("#loudong").append("<option value=''>请选择房屋所在楼栋(必填)</option>");
+                    for (var i = 0; i < data.result.length; i++) {
+                        $("#loudong").append('<option value=' + data.result[i].building_code + '>' + data.result[i].name + '</option>');
+                    }
+                } else if (data.statuscode == 2) {
+                    alert(data.message)
+                }
+            })
+        } 
+    }
+
+    // 日期js
+    jeDate({
+        dateCell: "#dateinfo",
+        format: "YYYY-MM-DD hh:mm:ss",
+        isinitVal: true,
+        isTime: true, //isClear:false,
+        minDate: "2014-09-19 00:00:00",
+        okfun: function (val) {
+            alert(val)
+        }
+    })
+
+
+</script>
+</html>
+

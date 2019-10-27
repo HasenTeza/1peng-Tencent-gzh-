@@ -1,0 +1,48 @@
+<!DOCTYPE >
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>招商</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/zhaoshang.js"></script>
+<script language="javascript">
+$(document).ready(function(e){
+      var opt   =   {
+        "speed" :   "fast"      ,   //变换速度,三速度可选 slow,normal,fast;
+        "by"    :   "mouseover"     ,   //触发事件,click或者mouseover;
+        "auto"  :   true        ,   //是否自动播放;
+        "sec"   :   3000            //自动播放间隔;
+      };
+      $("#demo").IMGDEMO(opt);    
+});
+</script>
+
+</head>
+<body>
+<div>
+<ul id="demo">
+    <li class="active">
+        <img src="images/1.png"  />
+        <div><a href="#">标题1</a></div>
+    </li>
+    <li>
+        <img src="images/1.png"  />
+        <div><a href="#">标题2</a></div>
+    </li>
+    <li>
+        <img src="images/1.png"  />
+        <div><a href="#">标题3</a></div>
+    </li>
+    <li>
+        <img src="images/1.png"  />
+        <div><a href="#">标题4</a></div>
+    </li>
+    <li>
+        <img src="images/1.png"  />
+        <div><a href="#">标题5</a></div>
+    </li>
+</ul>
+</div>
+</body>
+</html>

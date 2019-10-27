@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>打印</title>
+<!-- <link rel="stylesheet" type="text/css" href="print.css" media="print"/>-->
+<!-- <link rel="stylesheet" type="text/css" href="screen.css" media="screen"/> -->
+
+<script language="javascript">
+      function printdiv(printpage) {
+        var newstr = printpage.innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = newstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+      }
+      window.onload = function(){
+        var bt = document.getElementById("bt");
+        var div_print = document.getElementById("div_print");
+        bt.onclick = function(){
+          printdiv(div_print);
+        }
+      }
+    </script>
+</head>
+
+<body>
+    <div id="div_print">
+    <h1 style="Color:Red">这是要被打印的内容</h1>
+    </div>
+
+    <p>其他都不会被打印</p>
+    <p>其他都不会被打印</p>
+    <p>其他都不会被打印</p>
+    <p>其他都不会被打印</p>
+    <p>其他都不会被打印</p>
+    <p>其他都不会被打印</p>
+    <p>只有这一个HTML文件</p>
+    
+    <input name="prin" type="button" id="bt" value="点击打印" />
+
+
+
+</body>
+
+
+</html>

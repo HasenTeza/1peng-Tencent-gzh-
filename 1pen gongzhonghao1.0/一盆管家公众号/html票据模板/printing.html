@@ -1,0 +1,180 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>打印</title>
+    <style>
+        *{margin:0;padding:0;}
+        ul, li {list-style:none;}
+        input{outline: none}
+        a {color:#666;text-decoration:none;}
+        a:hover {color:#F30;}
+        .clearfix:after {
+            content:".";
+            display:block;
+            height:0;
+            clear:both;
+            visibility:hidden
+        }
+        * html .clearfix {
+            height:1%
+        }
+        *+html .clearfix {
+            min-height:1%
+        }
+        .form {
+            margin-top: 30px;
+            width:750px;
+            margin:0 auto;
+            border:1px solid #aaa
+        }
+        .bdbottomc {
+            border:#333 2px solid;
+        }
+        .bdbottomca li {
+            float:left;
+            width:189px;
+        }
+        .bdbottomcbb span {
+            border:#000 2px solid;
+            border-right:none;
+            border-bottom:none;
+        }
+        #bt{
+            border-color: white;
+            width: 50px;
+            height: 50px;
+            size: 15px;
+            float: right;
+            margin-right: 145px;
+            margin-top: 30px;
+            background-image: url(__CDN__/assets/img/dayin.png);
+        }
+
+    </style>
+    <script language="javascript">
+        function printdiv(printpage) {
+            var newstr = printpage.innerHTML;
+            var oldstr = document.body.innerHTML;
+            document.body.innerHTML = newstr;
+            window.print();
+            document.body.innerHTML = oldstr;
+            return false;
+        }
+        window.onload = function(){
+            var bt = document.getElementById("bt");
+            var div_print = document.getElementById("div_print");
+            bt.onclick = function(){
+                printdiv(div_print);
+            }
+        }
+    </script>
+
+
+    <script language="javascript">
+        function printdiv(printpage) {
+            var newstr = printpage.innerHTML;
+            var oldstr = document.body.innerHTML;
+            document.body.innerHTML = newstr;
+            window.print();
+            document.body.innerHTML = oldstr;
+            return false;
+        }
+        window.onload = function(){
+            var bt = document.getElementById("bt");
+            var div_print = document.getElementById("div_print");
+            bt.onclick = function(){
+                printdiv(div_print);
+            }
+        }
+    </script>
+</head>
+
+<body>
+<div id="div_print">
+    <div class="form" >
+        <div style="position: relative;height: 180px;">
+            <div style="text-align: center;padding-top:40px;font-weight: 500;font-size: 21px;">北 京 一 盆 社 区 科 技 有 限 公 司 </div>
+            <div style="text-align: center;font-weight: 500;font-size: 20px;">专 用 收 据</div>
+            <div style="position: absolute;top: 152px;left: 40px;font-size: 13px;">
+                客 户 名 称：
+                <input type="text" class="txt"   value="{$row.user_name}"  autocomplete="off" style="border:none; width:90px;background:#fff" maxlength="6" disabled="true"/>
+            </div>
+            <div style="position: absolute;top: 152px;right:90px;font-size: 13px;">小区名字：
+                <input type="text" class="txt"   value="{$row.name}"   autocomplete="off" style="border:none;  width:130px;background:#fff" maxlength="20" disabled="true"/></div>
+            <div style="position: absolute;top: 130px;right:90px;font-size: 13px;">缴费日期：
+                <input type="text" class="txt"   value="{$row.pay_date}"  autocomplete="off" style="border:none;  width:130px;background:#fff" maxlength="20" disabled="true"/></div>
+
+        </div>
+        <div class="bd clearfix">
+            <div class="bdbottom">
+                <table width="100%">
+                    <tr>
+                        <td align="center" width="5%">&nbsp;</td>
+                        <td width="90%"><div class="bdbottomc">
+                            <table width="100%" style="border-collapse:collapse">
+                                <tr bgcolor="cccccc">
+                                    <td style="border:1px solid #000;text-align: center;">姓名</td>
+                                    <td style="border:1px solid #000;text-align: center;">楼栋</td>
+                                    <td style="border:1px solid #000;text-align: center;">单元</td>
+                                    <td style="border:1px solid #000;text-align: center;">房间号</td>
+                                    <td style="border:1px solid #000;text-align: center;">面积</td>
+                                    <td style="border:1px solid #000;text-align: center;">金额</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #000; padding:2px">
+                                        <input type="text" class="txt"   value="{$row.user_name}"  autocomplete="off" style="border:none; background:#fff; width:90%; text-align:center; height:30px" disabled="true"/>
+                                    </td>
+                                    <td style="border:1px solid #000; padding:2px">
+                                        <input type="text" class="txt"   value="{$row.floor}"  autocomplete="off" style="border:none; background:#fff; width:90%; text-align:center; height:30px" disabled="true"/>
+                                    </td>
+                                    <td style="border:1px solid #000; padding:2px">
+                                        <input type="text" class="txt"   value="{$row.unit}"  autocomplete="off" style="border:none; background:#fff; width:90%; text-align:center; height:30px" disabled="true"/>
+                                    </td>
+                                    <td style="border:1px solid #000; padding:2px">
+                                        <input type="text" class="txt"   value="{$row.room}"  autocomplete="off" style="border:none; background:#fff; width:90%; text-align:center; height:30px" disabled="true"/>
+                                    </td>
+                                    <td style="border:1px solid #000; padding:2px">
+                                        <input type="text" class="txt"   value="{$row.area}"  autocomplete="off" style="border:none; background:#fff; width:90%; text-align:center; height:30px" disabled="true"/>
+                                    </td>
+                                    <td style="border:1px solid #000; padding:2px">
+                                        <input type="text" class="txt"   value="{$row.assessment}"  autocomplete="off" style="border:none; background:#fff; width:90%; text-align:center; height:30px" disabled="true"/>
+                                    </td>
+                                </tr>
+
+                                <!--</tr>-->
+                                <tr bgcolor="cccccc">
+                                    <td colspan="2" style="border:2px solid #000;text-align: center;">合计：</td>
+                                    <td colspan="4" style="border:2px solid #000;text-align: center;">{$row.assessment}</td>
+                                </tr>
+                            </table>
+                        <td align="center" width="5%">&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="foot" style="background:#fff; padding: 15px 40px 0;">
+    <span>发票号（Filler）：
+    <input type="text" name="tt" value="{$row.invoice}" style="border:none; background:#fff; width:180px"  disabled="true"/></span>
+            <span>
+    <input type="text" name="tt"  style="border:none; background:#fff; width:95px" disabled="true"/></span>
+            <span >收款人（Payee）：
+    <input type="text" name="tt" value="{$row.username}" style="border:none; background:#fff; width:100px" disabled="true"/></span>
+        </div>
+        <div class="foot" style="background:#fff; padding: 30px 40px 40px;position: relative;">
+            <input type="text" name="tt"  style="border:none; background:#fff; width:400px" disabled="true"/>
+            打印时间：
+            <input type="text" name="tt" value="{$row.time}" style="border:none; background:#fff; width:100px" disabled="true"/>
+        </div>
+
+    </div>
+
+</div>
+<input name="prin" type="button" id="bt" value="" />
+
+</body>
+
+
+</html>
+

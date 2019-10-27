@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery打印插件</title>
+<link rel="stylesheet" type="text/css" href="screen.css" media="screen"/>
+</head>
+
+<body>
+<div id="ddd">
+  <table>
+    <tr>
+      <td>test</td>
+      <td>test</td>
+      <td>test</td>
+      <td>test</td>
+      <td>test</td>
+    </tr>
+  </table>
+</div>
+<input type="button" id="dayin" value="打印"/>
+<script type="text/javascript">
+  function printReport(){
+
+var newstr = document.getElementById("myDivId").innerHTML;
+
+var oldstr = document.body.innerHTML;
+
+document.body.innerHTML = newstr;
+
+window.print();
+
+document.body.innerHTML = oldstr;
+
+return false;
+
+}
+
+</script>
+</body>
+</html>
